@@ -1,22 +1,43 @@
 <?php
 
-require_once( 'Model/Model.php' );
-require_once('Controller/Controller.php');
-require_once('View/View.php');
+spl_autoload_register(function ($className){
+    require_once ($className . '.php');
+});
 
-use \Model\Model;
-use \Controller\Controller;
-use \View\View;
+$page = $_GET['page'];
+if(!empty($page)) {
+    $data = [
+        'main' => [
+            'model' => null,
+            'view' => null,
+            'controller' => null
+        ],
+        'search' => [
+            'model' => 'SearchModel',
+            'view' => 'SearchView',
+            'controller' => 'SearchController'
+        ],
+        'results' => [
+            'model' => 'ResultsModel',
+            'view' => 'ResultsView',
+            'controller' => 'ResultsController'
+        ],
+    ];
 
-$model = new Model();
-$controller = new Controller( $model );
-$view = new View( $controller, $model );
+    foreach ($data as $key => $components) {
+        if($page == $key) {
+            $model = $components['model'];
+            $view = $components['view'];
+            $controller = $components['controller'];
+            break;
+        }
+    }
 
-if(
-    isset( $_GET['action'] )
-    && ! empty( $_GET['action'] )
-) {
-    $controller->{ $_GET['action'] }();
+    if(isset($model)) {
+        $m = new $model();
+        $c = new $controller($model);
+        $v = new $view($model);
+
+        echo $v->output();
+    }
 }
-
-echo $view->output();

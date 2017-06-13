@@ -6,10 +6,10 @@
  * Time: 15:05
  */
 
-namespace Controller;
+//namespace Controller;
 
 
-class Controller
+class ResultsController
 {
     private $model;
 

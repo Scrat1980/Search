@@ -3,18 +3,16 @@
  * Created by PhpStorm.
  * User: ivan
  * Date: 13.06.17
- * Time: 15:12
+ * Time: 16:47
  */
 
-namespace Model;
-
-
-class Model
+class ResultsModel
 {
     public $string;
 
     public function __construct()
     {
-        $this->string = 'String';
+        $this->string = 'Результаты';
     }
+
 }
