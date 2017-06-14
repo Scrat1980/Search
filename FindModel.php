@@ -24,7 +24,7 @@ class FindModel
         $record = $this->extractElementsFromPage($page);
 
         $db = new Db();
-//        $db->write($record);
+        $db->write($record);
 
         return true;
     }
@@ -63,6 +63,9 @@ class FindModel
             $elements,
             count($elementsList)
         );
+
+//        var_dump($record);
+//        die;
 
         return $record;
 

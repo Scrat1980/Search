@@ -13,8 +13,25 @@ class Db
     private $userName = 'root';
     private $password = '1';
 
-    public function instance()
+
+    public function write($record)
     {
-        return $dbHandler = new PDO("mysql:host=$this->host;dbname=$this->dbName", $this->userName, $this->password);
+        try {
+            $dbHandler = new PDO(
+                "mysql:host=$this->host;dbname=$this->dbName",
+                $this->userName,
+                $this->password
+            );
+
+            $sql = "INSERT INTO searches (site, elements, number_of_elements)
+                VALUES ('$record->site', '$record->elements',
+                '$record->number_of_elements')";
+
+            $dbHandler->exec($sql);
+
+        } catch(PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+        $dbHandler = null;
     }
 }
