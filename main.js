@@ -22,11 +22,11 @@ var App = {
                     }
                 }).done(function(response){
                     // console.log('ok');
-                    $('#status').text(response).fadeOut(
+                    $('#status').text(response)/*.fadeOut(
                         2000,
                         function(){
                             $('#status').text('').show();
-                        });
+                        });*/
 
                 });
             }

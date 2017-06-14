@@ -1,5 +1,4 @@
 <?php
-
 spl_autoload_register(function ($className){
     require_once ($className . '.php');
 });
@@ -18,7 +17,7 @@ $rout = [
         'action' => 'results',
     ],
     'ajax' => [
-        'controller' => 'AjaxController',
+        'controller' => 'FindController',
         'action' => 'index',
     ],
 ];

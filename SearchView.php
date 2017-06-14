@@ -22,9 +22,9 @@ class SearchView
             
             <label for='type'>Введите тип содержимого</label>
             <select id='type'>
-                <option selected value='Ссылка'>Ссылка</option>
-                <option value='Изображение'>Изображение</option>
-                <option value='Текст'>Текст</option>
+                <option selected value='link'>Ссылка</option>
+                <option value='image'>Изображение</option>
+                <option value='text'>Текст</option>
             </select><br>
             <input id='submit' type='submit'>                
                 
