@@ -6,10 +6,8 @@
  * Time: 15:12
  */
 
-//namespace Model;
 
-
-class Model
+class SearchModel
 {
     public $string;
 

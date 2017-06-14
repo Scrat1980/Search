@@ -4,40 +4,35 @@ spl_autoload_register(function ($className){
     require_once ($className . '.php');
 });
 
-$page = $_GET['page'];
-if(!empty($page)) {
-    $data = [
-        'main' => [
-            'model' => null,
-            'view' => null,
-            'controller' => null
-        ],
-        'search' => [
-            'model' => 'SearchModel',
-            'view' => 'SearchView',
-            'controller' => 'SearchController'
-        ],
-        'results' => [
-            'model' => 'ResultsModel',
-            'view' => 'ResultsView',
-            'controller' => 'ResultsController'
-        ],
-    ];
+$page = (isset($_GET['page']))
+    ? $_GET['page']
+    : 'search';
 
-    foreach ($data as $key => $components) {
-        if($page == $key) {
-            $model = $components['model'];
-            $view = $components['view'];
-            $controller = $components['controller'];
-            break;
-        }
+$rout = [
+    'search' => [
+        'controller' => 'SiteController',
+        'action' => 'search',
+    ],
+    'results' => [
+        'controller' => 'SiteController',
+        'action' => 'results',
+    ],
+    'ajax' => [
+        'controller' => 'AjaxController',
+        'action' => 'index',
+    ],
+];
+
+foreach ($rout as $key => $components) {
+    if($page == $key) {
+        $controller = $components['controller'];
+        $action = $components['action'];
+        break;
     }
+}
 
-    if(isset($model)) {
-        $m = new $model();
-        $c = new $controller($model);
-        $v = new $view($model);
+if(isset($controller)) {
+    $c = new $controller();
+    $c->{$action}();
 
-        echo $v->output();
-    }
 }
