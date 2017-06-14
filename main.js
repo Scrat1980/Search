@@ -4,6 +4,7 @@
 
 $( document ).ready(function() {
     App.index();
+    App.loadElements();
 
 });
 
@@ -32,5 +33,18 @@ var App = {
             }
         );
 
+    },
+
+    loadElements: function(){
+        $('.result').on('click', function(e){
+            var id = $(this).attr('data-id');
+            console.log(id);
+            $.ajax({
+                url: '/index.php?page=details',
+                data: id
+            }).done(function(response){
+
+            });
+        });
     }
 };

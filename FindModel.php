@@ -14,7 +14,7 @@ class FindModel
     private $patternLink = "@<a\b[^>]*>(.*?)</a>@";
     private $patternImage = '@<img[^>]+src=\"([^\">]+)\"@';
 
-    public function processData($site, $type, $text)
+    public function getDataFromSite($site, $type, $text)
     {
         $this->site = $site;
         $this->type = $type;
@@ -24,7 +24,7 @@ class FindModel
         $record = $this->extractElementsFromPage($page);
 
         $db = new Db();
-        $db->write($record);
+        $db->insert($record);
 
         return true;
     }
@@ -63,9 +63,6 @@ class FindModel
             $elements,
             count($elementsList)
         );
-
-//        var_dump($record);
-//        die;
 
         return $record;
 

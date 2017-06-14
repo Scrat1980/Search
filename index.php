@@ -20,6 +20,10 @@ $rout = [
         'controller' => 'FindController',
         'action' => 'index',
     ],
+    'details' => [
+        'controller' => 'FindController',
+        'action' => 'details'
+    ]
 ];
 
 foreach ($rout as $key => $components) {

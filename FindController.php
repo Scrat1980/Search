@@ -31,7 +31,7 @@ class FindController
         }
 
         $model = new FindModel();
-        $resultCorrect = $model->processData(
+        $resultCorrect = $model->getDataFromSite(
             $this->site,
             $this->type,
             $this->text
@@ -42,6 +42,11 @@ class FindController
         }
 
         echo $this->status;
+    }
+
+    public function details()
+    {
+        
     }
 
     private function validates()

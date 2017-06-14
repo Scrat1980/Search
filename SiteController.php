@@ -18,15 +18,17 @@ class SiteController
 
     public function results()
     {
-//        $model = new ResultsModel();
+        $model = new ResultsModel();
+        $list = $model->getSites();
+
         $view = new ResultsView();
-        $this->render($view);
+        $this->render($view, ['list' => $list]);
     }
 
-    private function render($view)
+    private function render($view, $params=null)
     {
         $commonView = new CommonView();
         echo $commonView->output();
-        echo $view->output();
+        echo $view->output($params);
     }
 }

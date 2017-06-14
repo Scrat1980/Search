@@ -14,7 +14,7 @@ class Db
     private $password = '1';
 
 
-    public function write($record)
+    public function insert($record)
     {
         try {
             $dbHandler = new PDO(
@@ -28,10 +28,30 @@ class Db
                 '$record->number_of_elements')";
 
             $dbHandler->exec($sql);
-
         } catch(PDOException $e) {
             echo $sql . "<br>" . $e->getMessage();
         }
         $dbHandler = null;
     }
+
+    public function query($sql)
+    {
+
+        try {
+            $dbHandler = new PDO(
+                "mysql:host=$this->host;dbname=$this->dbName",
+                $this->userName,
+                $this->password
+            );
+
+            $result = $dbHandler->query($sql);
+
+        } catch(PDOException $e) {
+            echo $sql . "<br>" . $e->getMessage();
+        }
+        $dbHandler = null;
+
+        return $result;
+    }
+
 }
