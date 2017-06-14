@@ -21,10 +21,10 @@ class FindModel
         $this->text = $text;
 
         $page = $this->getPage();
-        $elements = $this->extractElementsFromPage($page);
+        $record = $this->extractElementsFromPage($page);
 
         $db = new Db();
-        $db->write($elements);
+//        $db->write($record);
 
         return true;
     }
@@ -52,9 +52,19 @@ class FindModel
         $pattern = $this->getPattern();
         preg_match_all($pattern, $page, $matches);
 
-//        print_r($matches[0]);
-//        die;
-        return $matches[0];
+        $elementsList = $matches[0];
+        $elements = '';
+        foreach ($elementsList as $element) {
+            $elements .= $element;
+        }
+
+        $record = new Record(
+            $this->site,
+            $elements,
+            count($elementsList)
+        );
+
+        return $record;
 
     }
 
